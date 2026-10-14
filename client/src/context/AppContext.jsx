@@ -6,6 +6,8 @@ export const AppContent = createContext()
 
 export const AppContextProvider = (props)=>{
 
+    axios.defaults.withCredentials = true
+
     
     const [isLoggedin, setIsLoggedin] = useState(false)
     const [userData, setUserData] = useState()
@@ -14,7 +16,7 @@ export const AppContextProvider = (props)=>{
 
     const getAuthState = async() => {
         try {
-            const {data} = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/auth/is-auth`)
+            const {data} = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/auth/is-auth`)
             if(data.success){
                 setIsLoggedin(true)
                 getUserData()
