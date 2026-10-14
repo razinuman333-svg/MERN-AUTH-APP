@@ -109,8 +109,8 @@ export const logout = async (req, res) => {
 
 export const sendVerifyOtp = async(req,res) => {
     try {
-        const {userId} = req.userId
-        const user = await userModel.findById(userId)
+        
+        const user = await userModel.findById(req.userId)
 
         if(user.isAccountVerified){
             return res.json({success:false,message:"account already verified"})
@@ -141,7 +141,7 @@ export const sendVerifyOtp = async(req,res) => {
 
 export const verifyEmail = async(req,res) => {
   
-    const {userId} = req.userId
+    const userId = req.userId
     const {otp} = req.body
 
     if(!userId || !otp){
